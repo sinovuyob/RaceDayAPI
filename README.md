@@ -72,4 +72,3 @@ The project includes 20+ unit tests covering:
 - **EnrolmentsController** — enrolling, capacity checks, cancellation
 - **Role-Based Access** — verifying that Organiser-only endpoints are protected
 
-Run tests locally with:
