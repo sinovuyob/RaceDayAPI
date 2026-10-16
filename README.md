@@ -10,7 +10,7 @@ RaceDay is a full-stack web-based event management system designed specifically 
 - Results tracking and leaderboards
 - Live weather information
 - Route mapping and details
-- Role-based access control
+- Role-based access controL
 
 ## User Roles
 
