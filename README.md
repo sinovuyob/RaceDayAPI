@@ -72,3 +72,8 @@ The project includes 20+ unit tests covering:
 - **EnrolmentsController** — enrolling, capacity checks, cancellation
 - **Role-Based Access** — verifying that Organiser-only endpoints are protected
 
+Workflows: 
+<img width="1460" height="496" alt="workflow" src="https://github.com/user-attachments/assets/10669343-6d02-4bbd-ba95-c94a914a62b5" />
+<img width="1007" height="572" alt="workflow" src="https://github.com/user-attachments/assets/c4e2b962-9b16-4c14-9065-690ff3da3949" />
+<img width="1041" height="570" alt="workflow3" src="https://github.com/user-attachments/assets/03d75192-5cd5-4c79-ae0b-96ffb2063707" />
+
