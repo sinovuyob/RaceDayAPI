@@ -62,3 +62,14 @@ This part implements the RaceDay API using ASP.NET Core Web API, Entity Framewor
 
 ### CI/CD
 GitHub Actions builds the project and runs all unit tests on every push.
+
+## Testing
+
+The project includes 20+ unit tests covering:
+
+- **AuthController** — registration, login, validation, duplicate emails
+- **EventsController** — CRUD operations and role-based access
+- **EnrolmentsController** — enrolling, capacity checks, cancellation
+- **Role-Based Access** — verifying that Organiser-only endpoints are protected
+
+Run tests locally with:
