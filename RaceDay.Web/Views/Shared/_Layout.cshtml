@@ -22,9 +22,30 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        @if (Context.Session.GetString("JWToken") != null)
+                        {
+                            @if (Context.Session.GetString("UserRole") == "Organiser")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Organiser" asp-action="Index">Organiser Dashboard</a>
+                                </li>
+                            }
+                            <li class="nav-item ms-auto">
+                                <span class="nav-link text-dark fw-bold">Hello, @Context.Session.GetString("UserName")</span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-danger" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item ms-auto">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
