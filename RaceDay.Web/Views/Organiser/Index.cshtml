@@ -1,0 +1,40 @@
+﻿@model IEnumerable<RaceDay.Web.Models.EventResponseDto>
+@{
+    ViewData["Title"] = "Organiser Dashboard";
+}
+
+<div class="container mt-4">
+    <h2>Organiser Dashboard</h2>
+    <hr />
+    <div class="d-flex justify-content-between mb-3">
+        <h4>Your Events</h4>
+        <a href="#" class="btn btn-success">Create New Event</a>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Event Name</th>
+                <th>Date</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ev in Model)
+            {
+                <tr>
+                    <td>@ev.EventName</td>
+                    <td>@ev.EventDate.ToString("yyyy-MM-dd")</td>
+                    <td>@ev.Location</td>
+                    <td><span class="badge bg-primary">@ev.EventStatus</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary">Edit</button>
+                        <button class="btn btn-sm btn-outline-danger">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
