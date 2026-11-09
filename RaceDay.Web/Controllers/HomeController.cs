@@ -1,32 +1,31 @@
 using Microsoft.AspNetCore.Mvc;
 using RaceDay.Web.Models;
+using RaceDay.Web.Services;
 using System.Diagnostics;
 
 namespace RaceDay.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ApiService _apiService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ApiService apiService)
         {
-            _logger = logger;
+            _apiService = apiService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            // Fetch all events from the API
+            var events = await _apiService.GetAsync<List<EventResponseDto>>("events");
+
+            // If the API is down or returns null, pass an empty list
+            return View(events ?? new List<EventResponseDto>());
         }
 
         public IActionResult Privacy()
         {
             return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

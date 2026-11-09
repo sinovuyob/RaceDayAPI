@@ -1,8 +1,43 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<RaceDay.Web.Models.EventResponseDto>
+@{
+    ViewData["Title"] = "Upcoming Events";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-4">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">RaceDay Events</h1>
+        <p class="lead">Find your next race, walk, or cycle challenge.</p>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-warning text-center">
+            No events found. Make sure your API is running and the database is connected.
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var ev in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body">
+                            <span class="badge bg-success mb-2">@ev.EventType</span>
+                            <h4 class="card-title fw-bold">@ev.EventName</h4>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                <i class="bi bi-calendar"></i> @ev.EventDate.ToString("dd MMM yyyy")
+                            </h6>
+                            <p class="card-text text-truncate">@ev.Description</p>
+                            <p class="mb-1"><strong>Location:</strong> @ev.Location</p>
+                            <p class="mb-1"><strong>Categories:</strong> @ev.CategoryCount</p>
+                        </div>
+                        <div class="card-footer bg-white border-0 text-center pb-3">
+                            <a asp-action="Details" asp-route-id="@ev.EventId" class="btn btn-outline-primary w-100">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
 </div>
