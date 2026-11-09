@@ -77,3 +77,11 @@ Workflows:
 <img width="1007" height="572" alt="workflow" src="https://github.com/user-attachments/assets/c4e2b962-9b16-4c14-9065-690ff3da3949" />
 <img width="1041" height="570" alt="workflow3" src="https://github.com/user-attachments/assets/03d75192-5cd5-4c79-ae0b-96ffb2063707" />
 
+**PART 3**
+## 🐳 Docker Setup
+
+The API is containerised using Docker. To build and run the container, use the following commands from the root directory (where the `.sln` file is located):
+
+```bash
+docker build -t raceday-api -f RaceDay.API/Dockerfile .
+docker run -d -p 8080:8080 --name raceday-container raceday-api
