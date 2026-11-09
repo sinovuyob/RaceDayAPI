@@ -9,18 +9,16 @@ namespace RaceDay.Web.Services
         private readonly HttpClient _httpClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-       
-        private const string BaseUrl = "https://localhost:7101/swagger/index.html";
-
-        public ApiService(IHttpContextAccessor httpContextAccessor)
+        public ApiService(HttpClient httpClient, IHttpContextAccessor httpContextAccessor)
         {
+            _httpClient = httpClient;
             _httpContextAccessor = httpContextAccessor;
-            _httpClient = new HttpClient { BaseAddress = new Uri(BaseUrl) };
+
+            _httpClient.BaseAddress = new Uri("https://localhost:7101/swagger/index.html");
         }
 
         private void SetToken()
         {
-            // Look for the token stored in the session
             var token = _httpContextAccessor.HttpContext?.Session.GetString("JWToken");
             if (!string.IsNullOrEmpty(token))
             {
@@ -32,7 +30,6 @@ namespace RaceDay.Web.Services
             }
         }
 
-        // GET Request
         public async Task<T?> GetAsync<T>(string endpoint)
         {
             SetToken();
@@ -45,7 +42,6 @@ namespace RaceDay.Web.Services
             return default;
         }
 
-        // POST Request
         public async Task<TResponse?> PostAsync<TRequest, TResponse>(string endpoint, TRequest data)
         {
             SetToken();
@@ -61,7 +57,6 @@ namespace RaceDay.Web.Services
             return default;
         }
 
-        // PUT Request
         public async Task<bool> PutAsync<T>(string endpoint, T data)
         {
             SetToken();
@@ -72,7 +67,6 @@ namespace RaceDay.Web.Services
             return response.IsSuccessStatusCode;
         }
 
-        // DELETE Request
         public async Task<bool> DeleteAsync(string endpoint)
         {
             SetToken();

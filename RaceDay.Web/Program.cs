@@ -16,7 +16,14 @@ builder.Services.AddSession(options =>
 
 // Register API Service
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddScoped<ApiService>();
+builder.Services.AddHttpClient<ApiService>()
+    .ConfigurePrimaryHttpMessageHandler(() =>
+    {
+        var handler = new HttpClientHandler();
+        // This tells the Web App to trust the local development certificate
+        handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true;
+        return handler;
+    });
 
 var app = builder.Build();
 
@@ -24,7 +31,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
